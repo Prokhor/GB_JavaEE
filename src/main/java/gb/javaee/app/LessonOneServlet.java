@@ -5,10 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "LessonOneServlet", urlPatterns = "/get_products")
 public class LessonOneServlet implements Servlet {
@@ -20,7 +18,7 @@ public class LessonOneServlet implements Servlet {
     private void initProducts(int cnt){
         products = new Product[cnt];
         for (int i = 0; i < cnt; i++) {
-            products[i] = new Product(i + 1, String.format("Title %s", i + 1), 1.21 * i + 1);
+            products[i] = new Product(i + 1, String.format("Title %s", i + 1), 1.21 * (i + 1));
         }
     }
 
@@ -47,13 +45,14 @@ public class LessonOneServlet implements Servlet {
     @Override
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
         logger.info("Request to servlet");
-
         initProducts(10);
-
+        PrintWriter out = servletResponse.getWriter();
         if (products.length > 0){
-            for (int i = 0; i < products.length; i++) {
-                servletResponse.getWriter().println(String.format("<h1>Product %s: %s$</h1>", products[i].getTitle(), products[i].getCost()));
+            out.println("<h1>Products List</h1><hr>");
+            for (Product product : products) {
+                out.println(String.format("<h2>%s: %.3f $</h2>", product.getTitle(), product.getCost()));
             }
         }
+        out.close();
     }
 }

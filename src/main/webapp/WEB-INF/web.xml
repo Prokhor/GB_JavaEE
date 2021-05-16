@@ -6,4 +6,13 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+<!--    <servlet>-->
+<!--        <servlet-name>LessonOneServlet</servlet-name>-->
+<!--        <servlet-class>gb.javaee.app.LessonOneServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>LessonOneServlet</servlet-name>-->
+<!--        <url-pattern>/get_products</url-pattern>-->
+<!--    </servlet-mapping>-->
+
 </web-app>
